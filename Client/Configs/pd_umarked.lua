@@ -1,0 +1,6 @@
+RegisterVehicle("pdum1", { extra = 7, bone = 1 })
+RegisterVehicle("pdum2", { extra = 7, bone = 1 })
+RegisterVehicle("pdum3", { extra = 7, bone = 1 })
+RegisterVehicle("pdum4", { extra = 7, bone = 1 })
+RegisterVehicle("pdum5", { extra = 7, bone = 1 })
+RegisterVehicle("pdum6", { extra = 7, bone = 1 })

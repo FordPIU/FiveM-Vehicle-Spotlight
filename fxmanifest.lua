@@ -6,6 +6,8 @@ author "Caleb B."
 version "0.2"
 
 client_scripts {
-    "Client/*.lua",
+    "Client/Utils.lua",
+    "Client/ExtraLib.lua",
+    "Client/Main.lua",
     "Client/Configs/*.lua",
 }

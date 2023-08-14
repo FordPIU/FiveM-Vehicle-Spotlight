@@ -1,0 +1,5 @@
+RegisterVehicle("sps1", { extra = 8, bone = "2" }, { { 2 } })
+RegisterVehicle("sps2", { extra = 8, bone = "2" }, { { 2 } })
+RegisterVehicle("sps3", { extra = 8, bone = "2" }, { { 2 } })
+RegisterVehicle("sps4", { extra = 8, bone = "2" }, { { 2 } })
+RegisterVehicle("sps5", { extra = 8, bone = "1" }, { { 2 } })

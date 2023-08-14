@@ -1,0 +1,8 @@
+RegisterVehicle("slr11sedan", { extra = 4, bone = 2 })
+RegisterVehicle("slr13utility", { extra = 4, bone = 2 })
+RegisterVehicle("slr16sedan", { extra = 4, bone = 2 })
+RegisterVehicle("slr16utility", { extra = 4, bone = 3 })
+RegisterVehicle("slr18sedan", { extra = 4, bone = 2 })
+RegisterVehicle("slr18suv", { extra = 4, bone = 3 })
+RegisterVehicle("slr20utility", { extra = 4, bone = 3 })
+RegisterVehicle("slr181500", { extra = 4, bone = 3 })

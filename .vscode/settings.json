@@ -1,0 +1,27 @@
+{
+    "Lua.diagnostics.globals": [
+        "GetHashKey",
+        "GetGamePool",
+        "GetEntityModel",
+        "GetVehicleLightsState",
+        "GetIsVehicleEngineRunning",
+        "IsVehicleExtraTurnedOn",
+        "GetEntityBoneIndexByName",
+        "GetWorldPositionOfEntityBone",
+        "DrawSpotLightWithShadow",
+        "GetVehiclePedIsIn",
+        "GetPedInVehicleSeat",
+        "PlayerPedId",
+        "SetVehicleExtra",
+        "DoesEntityExist",
+        "SetVehicleAutoRepairDisabled",
+        "RegisterCommand",
+        "vector3",
+        "GetEntityBoneRotation",
+        "RegisterKeyMapping",
+        "Citizen"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-doc-name"
+    ]
+}
