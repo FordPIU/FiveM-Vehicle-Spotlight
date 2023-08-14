@@ -6,7 +6,11 @@ function ToggleExtra(vehicle, extraId, value)
     Extras[vehicle][extraId] = Extras[vehicle][extraId] or { enabled = false, overriden = false }
     Extras[vehicle][extraId].enabled = value
 
-    if not Extras[vehicle][extraId].overriden then
+    if extraId == 9 then
+        print(Extras[vehicle][extraId].overriden)
+    end
+
+    if Extras[vehicle][extraId].overriden == false then
         SetVehicleExtra(vehicle, extraId, not value)
     end
 end

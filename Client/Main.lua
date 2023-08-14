@@ -11,14 +11,17 @@ local function lookupVehicle(vehicleEntity)
     return RegisteredVehicles[GetEntityModel(vehicleEntity)]
 end
 
-function GetVehicleControlsData(vehicleEntity, controlsIndex)
+function GetVehicleControlsData(vehicleEntity, index)
     local vehicleData = RegisteredVehicles[GetEntityModel(vehicleEntity)]
     if vehicleData == nil then return nil end
 
-    local controlsData = vehicleData.controls
-    if controlsData == nil then return nil end
-
-    return controlsData[controlsIndex]
+    if index == 4 then
+        return { vehicleData.takedown.extra }
+    else
+        local controlsData = vehicleData.controls
+        if controlsData == nil then return nil end
+        return controlsData[index]
+    end
 end
 
 ---Quick gets for toggle control functions.
@@ -72,8 +75,8 @@ Citizen.CreateThread(function()
                 end
 
                 -- Takedown
-                if vehicleData.takedowns ~= nil then
-                    local takedownData = vehicleData.takedowns
+                if vehicleData.takedown ~= nil then
+                    local takedownData = vehicleData.takedown
                     if IsVehicleExtraTurnedOn(vehicle, takedownData.extra) then
                         if (takedownData.requires_highbeans and on == 1) or (not takedownData.requires_highbeans) then
                             local bIndex = GetEntityBoneIndexByName(vehicle, "extra_" .. tostring(takedownData.extra))
@@ -112,33 +115,20 @@ end)
 RegisterKeyMappingEvent("togglecontrol3", "Toggle Takedowns", "DELETE", function(src, args, raw)
     local playerVehicle, vehicleData, playerIsDriver = toggleControlQuickGet()
 
-    if vehicleData and vehicleData.takedowns and playerIsDriver then
+    if vehicleData and vehicleData.takedown and playerIsDriver then
         local areOn = GetExtraState(playerVehicle, 4)
-        ToggleExtra(playerVehicle, 4) -- 4 because 3 is reserved for automatic child with 1 & 2 are on.
+        SetExtraState(playerVehicle, 4, not areOn) -- 4 because 3 is reserved for automatic child with 1 & 2 are on.
 
-        if vehicleData.takedowns.disables then
-            if areOn == true then
-                for _, index in pairs(vehicleData.takedowns.disables) do
+        if vehicleData.takedown.disables then
+            if areOn == false then
+                for _, index in pairs(vehicleData.takedown.disables) do
                     OverrideExtraState(playerVehicle, index, false)
                 end
             else
-                for _, index in pairs(vehicleData.takedowns.disables) do
+                for _, index in pairs(vehicleData.takedown.disables) do
                     ClearOverrideExtraState(playerVehicle, index)
                 end
             end
-        end
-    end
-end)
-
---- Extra Thread to Disable Vehicle Auto Repairs
-Citizen.CreateThread(function()
-    while true do
-        Wait(5000)
-        local playerPed = PlayerPedId()
-        local playerVeh = GetVehiclePedIsIn(playerPed, true)
-
-        if DoesEntityExist(playerVeh) then
-            SetVehicleAutoRepairDisabled(playerVeh, true)
         end
     end
 end)
