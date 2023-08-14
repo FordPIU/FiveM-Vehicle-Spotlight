@@ -1,0 +1,5 @@
+RegisterVehicle("pdairport1", { extra = 7, bone = 2 })
+RegisterVehicle("pdairport2", { extra = 7, bone = 2 })
+RegisterVehicle("pdairport3", { extra = 7, bone = 2 })
+RegisterVehicle("pdairport4", { extra = 7, bone = 2 })
+RegisterVehicle("pdairport5", { extra = 7, bone = 2 })
