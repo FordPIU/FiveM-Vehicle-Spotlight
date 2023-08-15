@@ -3,15 +3,15 @@ local Extras = {}
 
 function ToggleExtra(vehicle, extraId, value)
     Extras[vehicle] = Extras[vehicle] or {}
-    Extras[vehicle][extraId] = Extras[vehicle][extraId] or { enabled = false, overriden = false }
-    Extras[vehicle][extraId].enabled = value
+    Extras[vehicle][tonumber(extraId)] = Extras[vehicle][tonumber(extraId)] or { enabled = false, overriden = false }
+    Extras[vehicle][tonumber(extraId)].enabled = value
 
-    if extraId == 9 then
-        print(Extras[vehicle][extraId].overriden)
-    end
-
-    if Extras[vehicle][extraId].overriden == false then
-        SetVehicleExtra(vehicle, extraId, not value)
+    if Extras[vehicle][tonumber(extraId)].overriden == false then
+        if type(extraId) == "number" then
+            SetVehicleExtra(vehicle, tonumber(extraId), not value)
+        else
+            SetVehicleExtra(vehicle, tonumber(extraId), value)
+        end
     end
 end
 
@@ -61,10 +61,14 @@ function OverrideExtraState(vehicle, index, overrideValue)
     if extrasToToggle == nil then return end
     for _, extraId in pairs(extrasToToggle) do
         Extras[vehicle] = Extras[vehicle] or {}
-        Extras[vehicle][extraId] = Extras[vehicle][extraId] or { enabled = false, overriden = false }
-        Extras[vehicle][extraId].overriden = true
+        Extras[vehicle][tonumber(extraId)] = Extras[vehicle][tonumber(extraId)] or { enabled = false, overriden = false }
+        Extras[vehicle][tonumber(extraId)].overriden = true
 
-        SetVehicleExtra(vehicle, extraId, not overrideValue)
+        if type(extraId) == "number" then
+            SetVehicleExtra(vehicle, tonumber(extraId), not overrideValue)
+        else
+            SetVehicleExtra(vehicle, tonumber(extraId), overrideValue)
+        end
     end
 end
 
@@ -74,10 +78,14 @@ function ClearOverrideExtraState(vehicle, index)
     if extrasToToggle == nil then return end
     for _, extraId in pairs(extrasToToggle) do
         Extras[vehicle] = Extras[vehicle] or {}
-        Extras[vehicle][extraId] = Extras[vehicle][extraId] or { enabled = false, overriden = false }
-        Extras[vehicle][extraId].overriden = false
+        Extras[vehicle][tonumber(extraId)] = Extras[vehicle][tonumber(extraId)] or { enabled = false, overriden = false }
+        Extras[vehicle][tonumber(extraId)].overriden = false
 
-        SetVehicleExtra(vehicle, extraId, not Extras[vehicle][extraId].enabled)
+        if type(extraId) == "number" then
+            SetVehicleExtra(vehicle, tonumber(extraId), not Extras[vehicle][tonumber(extraId)].enabled)
+        else
+            SetVehicleExtra(vehicle, tonumber(extraId), Extras[vehicle][tonumber(extraId)].enabled)
+        end
     end
 end
 
@@ -86,9 +94,9 @@ function IsExtraStateOverridden(vehicle, index)
     if extrasToToggle == nil then return end
     for _, extraId in pairs(extrasToToggle) do
         Extras[vehicle] = Extras[vehicle] or {}
-        Extras[vehicle][extraId] = Extras[vehicle][extraId] or { enabled = false, overriden = false }
+        Extras[vehicle][tonumber(extraId)] = Extras[vehicle][tonumber(extraId)] or { enabled = false, overriden = false }
 
-        if Extras[vehicle][extraId].overriden == true then
+        if Extras[vehicle][tonumber(extraId)].overriden == true then
             return true
         end
     end
